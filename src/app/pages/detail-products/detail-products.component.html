@@ -1,1 +1,17 @@
-<p>detail-products works!</p>
+<h1 class="position-relative mb-4 text-center py-2 px-4 text-bg-secondary border border-secondary rounded-pill">PRODUCT
+    LIST
+</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" *ngFor="let view of items">
+            <mat-card class="example-card mb-3" appearance="outlined">
+                <img mat-card-image [src]="view.photoUrl" alt="Photo of a Shiba Inu">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{view.menuItemName}}</h5>
+                    <p class="card-text">Price: {{view.price}}</p>
+
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

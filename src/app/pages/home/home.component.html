@@ -3,7 +3,7 @@
 </h1>
 <div class="container">
     <div class="row">
-        <div class="col-md-4" *ngFor="let view of list_Category">
+        <div class="col-md-4" *ngFor="let view of list_Category"  (click)="navigate(view.categoryId)">
             <mat-card class="example-card mb-3" appearance="outlined">
                 <img mat-card-image [src]="view.photoUrl" alt="Photo of a Shiba Inu">
                 <mat-card-content>

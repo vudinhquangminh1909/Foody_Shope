@@ -33,5 +33,8 @@ export class HomeComponent implements OnInit{
     })
   }
 
+  navigate(item: any) {
+    this.router.navigate(['/Detail_Products', item])
+  }
 
 }

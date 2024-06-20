@@ -16,5 +16,14 @@ export class MasterService {
 
   onLogin(obj: any) : Observable<any> {
     return this.http.post<any>(`${this.apiEndPoint}/Login`, obj)
-   }
+  }
+
+  onRegister(obj: any) : Observable<any> {
+    return this.http.post<any>(`${this.apiEndPoint}/AddNewUser`, obj)
+  }
+
+  getAllFoodCategoriesName(id: any): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoint}/GetFoodItemByCategory?categoryId=`+id)
+  }
+
 }
