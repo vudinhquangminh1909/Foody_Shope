@@ -1,0 +1,29 @@
+<div class="container">
+
+    <div class="center">
+        <div class="Display_header">
+            <button class="btn_header_display " mat-flat-button (click)="navigateToRestaurantFoods()">Back</button>
+            <h2>PRODUCTS</h2>
+        </div>
+
+        <div class="list">
+            <div class="item" data-key="1" *ngFor="let view_Category of items_Category">
+                <div class="img">
+                    <img [src]="view_Category.photoUrl" alt="">
+                </div>
+                <div class="content">
+                    <div class="title">{{view_Category.menuItemName}}</div>
+                    <div class="des">
+                        {{view_Category.description}}
+                    </div>
+                    <div class="price">${{view_Category.price}}</div>
+                    <input type="number" class="count" min="1" value="1">
+                    <button class="update">Update</button>
+                    <button class="detele">Detele</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

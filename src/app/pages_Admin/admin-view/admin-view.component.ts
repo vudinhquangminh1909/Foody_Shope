@@ -17,4 +17,8 @@ export class AdminViewComponent {
   navigate_Manage_Category() {
     this.router.navigate(['/Admin_Food_Category'])
   }
-}
+
+  navigate_Manage_view_User() {
+    this.router.navigate(['/view_User'])
+  }
+} 

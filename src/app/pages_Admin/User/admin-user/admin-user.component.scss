@@ -3,26 +3,6 @@
   width: 100%;
 }
 
-.btn_Back {
-  position: absolute;
-  left: 50%;
-  margin-top: 51px;
-  border-radius: 19%;
-  background: aquamarine;
-  width: 4%;
-}
-
-.example-card {
-  max-width: 400px;
-}
-
-.modal-content{
-  width: 200%;
-  position: relative;
-  right: 47%;
-  height: 522px;
-}
-
 .btn {
   // padding: 15px 40px;
   border: none;
@@ -84,4 +64,21 @@
 .btn:active {
   color: #000;
   font-weight: bold;
+}
+
+.mat_form_field {
+  width: 100%;
+}
+
+.display_margin{
+  margin-bottom: 10px;
+}
+
+.btn_Back {
+  position: absolute;
+  left: 50%;
+  margin-top: 51px;
+  border-radius: 19%;
+  background: aquamarine;
+  width: 4%;
 }

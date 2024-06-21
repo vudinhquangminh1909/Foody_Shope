@@ -7,23 +7,24 @@ import { MasterService } from '../../../services/master.service';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import { ToastrService } from 'ngx-toastr';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+import {ConfirmationService, MessageService } from 'primeng/api';
+import {Router } from '@angular/router';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
 @Component({
   selector: 'app-admin-food-category',
   templateUrl: './admin-food-category.component.html',
   styleUrls: ['./admin-food-category.component.scss'],
   standalone: true,
-  imports: [CommonModule, MatProgressBarModule, MatCardModule, MatChipsModule, MatIconModule, MatMenuModule, MatTableModule, MatPaginatorModule, MatInputModule, MatFormFieldModule],
-  providers: [ConfirmationService, MessageService]
+  imports: [MatToolbarModule, CommonModule, MatProgressBarModule, MatCardModule, MatChipsModule, MatIconModule, MatMenuModule, MatTableModule, MatPaginatorModule, MatInputModule, MatFormFieldModule],
+  providers: [MessageService, ConfirmationService]
 })
 
 export class AdminFoodCategoryComponent implements OnInit, AfterViewInit {
+  
   displayedColumns: string[] = ['categoryId', 'categoryName', 'symbol'];
   dataSource = new MatTableDataSource<category_Interface>(ELEMENT_DATA);
 
@@ -46,9 +47,7 @@ export class AdminFoodCategoryComponent implements OnInit, AfterViewInit {
     this.master_Service.getAllCategory().subscribe((res: any) => {
       this.dataSource.data = res.data;
       this.dataSource.paginator = this.paginator;
-    });
-
-    
+    }); 
   }
 
   ngAfterViewInit() {
@@ -109,6 +108,10 @@ export class AdminFoodCategoryComponent implements OnInit, AfterViewInit {
       this.items_Category = res.data;
       console.log(this.items_Category)
     })
+  }
+
+  navigate(item: any) {
+    this.router.navigate(['/Admin_Food_Category',item])
   }
 
 }

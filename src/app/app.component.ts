@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'Online_Store';
   get_Role: any [] = []
+  
   registerObj: any = {
   "userId": 0,
   "userName": "",

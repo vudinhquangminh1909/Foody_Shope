@@ -1,0 +1,140 @@
+<div>
+    <div style="border: 2px solid black; border-radius: 10px; width: 70%; position: relative; left: 16%; top: 37px;">
+        <mat-form-field>
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+        </mat-form-field>
+
+        <button mat-menu-item (click)="createUser()">Add</button>
+
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="userName">
+                <th mat-header-cell *matHeaderCellDef> User Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="role">
+                <th mat-header-cell *matHeaderCellDef> Role </th>
+                <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="mobileNo">
+                <th mat-header-cell *matHeaderCellDef> Mobile No </th>
+                <td mat-cell *matCellDef="let element"> {{element.mobileNo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="emailId">
+                <th mat-header-cell *matHeaderCellDef> Email Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.emailId}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <!-- <td mat-cell *matCellDef="let element"> View </td> -->
+
+                <td mat-cell *matCellDef="let element">
+                    <button class="btn" style="border-radius: 5px; background: darkgray;" mat-button
+                        [matMenuTriggerFor]="menu">Menu</button>
+                    <mat-menu #menu="matMenu">
+                        <!-- <button mat-menu-item (click)="on_daiLog(); editCategorys(element.categoryId)">View</button> -->
+                        <button mat-menu-item (click)="editUser(element.userId)">Edit</button>
+                        <button mat-menu-item (click)="deteleUser(element.userId)">Delte</button>
+                    </mat-menu>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </div>
+
+</div>
+
+<button class="btn_Back btn" mat-flat-button (click)="navigateToRestaurantFoods()">Back</button>
+
+<div class="modal" id="Create_Form_Modal">
+    <div class="modal-dialog">
+        <div class="modal-content" style="height: 500%;">
+            <div class="modal-header">
+                <h4 class="modal-title">Create User</h4>
+                <button type="button" class="btn-close" (click)="off_daiLog_Edit()" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4 mat_form_field">
+
+                        <form [formGroup]="form2">
+
+                            <input class="form-control display_margin" formControlName="userName">
+                            <input class="form-control display_margin" formControlName="role">
+                            <input class="form-control display_margin" formControlName="mobileNo">
+                            <input class="form-control display_margin" formControlName="emailId">
+                            <input class="form-control display_margin" formControlName="password">
+
+                            <mat-card-actions style="margin-left: 28%;">
+
+                                <button (click)="addUser()" class="btn"
+                                    style="border-radius: 5px; background: darkgray;" mat-button>Create</button>
+
+                                <button (click)="off_daiLog_Edit()" class="btn"
+                                    style="margin-left: 10px; border-radius: 5px; background: darkgray;"
+                                    mat-button>Cancel</button>
+
+                            </mat-card-actions>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="Edit_Form_Modal">
+    <div class="modal-dialog">
+        <div class="modal-content" style="height: 500%;">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit User</h4>
+                <button type="button" class="btn-close" (click)="off_daiLog_Edit()" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4 mat_form_field">
+
+                        <form [formGroup]="form" (ngSubmit)="Create()">
+
+                            <input class="form-control display_margin" formControlName="userName">
+                            <input class="form-control display_margin" formControlName="role">
+                            <input class="form-control display_margin" formControlName="mobileNo">
+                            <input class="form-control display_margin" formControlName="emailId">
+
+                            <mat-card-actions style="margin-left: 28%;">
+
+                                <button (click)="updateUser()" class="btn"
+                                    style="border-radius: 5px; background: darkgray;" mat-button>Update</button>
+
+                                <button (click)="off_daiLog_Edit()" class="btn"
+                                    style="margin-left: 10px; border-radius: 5px; background: darkgray;"
+                                    mat-button>Cancel</button>
+
+                            </mat-card-actions>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
