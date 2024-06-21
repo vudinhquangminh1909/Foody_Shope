@@ -1,0 +1,84 @@
+<div>
+    <div style="border: 2px solid black; border-radius: 10px; width: 70%; position: relative; left: 16%; top: 37px;">
+        <mat-form-field>
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+        </mat-form-field>
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="categoryId">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.categoryId}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="categoryName">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <!-- <td mat-cell *matCellDef="let element"> View </td> -->
+
+                <td mat-cell *matCellDef="let element">
+                    <button style="border-radius: 5px; background: darkgray;" mat-button
+                        [matMenuTriggerFor]="menu">Menu</button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="on_daiLog(); editCategorys(element.categoryId)">View</button>
+                        <button mat-menu-item>Edit</button>
+                        <button mat-menu-item (click)="delete(element.categoryId)">Delte</button>
+                    </mat-menu>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </div>
+
+    <button class="btn_Back" mat-flat-button (click)="navigateToRestaurantFoods()">Back</button>
+</div>
+
+
+<div class="modal" id="loginModal">
+    <div class="modal-dialog">
+        <div class="modal-content" style="height: 500%;">
+            <div class="modal-header ">
+                <h4 class="modal-title" style="padding-left: 42%;">Login</h4>
+                <button type="button" class="btn-close" (click)="off_daiLog()" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body" style="display: flex;">
+
+                <div class="row">
+
+                    <div class="col-md-4" *ngFor="let view of items_Category">
+
+                        <mat-card class="example-card" appearance="outlined">
+                            <mat-card-header>
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title>{{view.menuItemName}}</mat-card-title>
+                            </mat-card-header>
+                            <img mat-card-image [src]="view.photoUrl">
+                            <mat-card-content>
+                                <p>{{view.description}}</p>
+                            </mat-card-content>
+                            <mat-card-actions style="margin-left: 36%;">
+                                <button mat-button>Update</button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

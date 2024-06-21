@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { MasterService } from './services/master.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { MasterService } from './services/master.service';
 })
 export class AppComponent {
   title = 'Online_Store';
-
+  get_Role: any [] = []
   registerObj: any = {
   "userId": 0,
   "userName": "",
@@ -31,7 +32,8 @@ export class AppComponent {
   constructor(
     private toastr: ToastrService,
     public dialog: MatDialog,
-    public master_Serivce: MasterService
+    public master_Serivce: MasterService,
+    private router: Router,
   ) {}
 
   onLogin() {
@@ -55,6 +57,15 @@ export class AppComponent {
         this.toastr.success("Login Success");
         localStorage.setItem('zomato_user', JSON.stringify(res.data));
         this.loggedUserData = res.data;
+      
+        const get_Role = res.data.role
+        console.log(get_Role)
+
+        if (get_Role == 'Admin') {
+          this.router.navigate(['/Control_Panel']);
+        } else {
+          this.router.navigate(['/home']);
+        }
       }
       else {
         this.toastr.error("Login Error");
@@ -65,6 +76,7 @@ export class AppComponent {
   onLogoFF() {
     localStorage.removeItem('zomato_user')
     this.loggedUserData = null;
+    this.router.navigate(['/home']);
   }
 
   onRegister() {
@@ -94,17 +106,5 @@ export class AppComponent {
     })
   }
 
-  //   onSave() {
-  //   this.master_Serivce.onRegister(this.registerObj).subscribe((res:any)=>{
-  //     if(res.result) {
-  //       this.closeRegister();
-  //       this.toastr.success('Registration Success');
-  //       localStorage.setItem('zomato_user', JSON.stringify(res.data));
-  //       this.loggedUserData = res.data;
-  //     } else {
-  //       alert(res.message);
-  //     }
-  //   })
-  // }
     
 }

@@ -26,4 +26,15 @@ export class MasterService {
     return this.http.get<any>(`${this.apiEndPoint}/GetFoodItemByCategory?categoryId=`+id)
   }
 
+  getRoleUserById(id: any): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoint}/GetUserByUserId?userId=`+id)
+  }
+
+  deleteFoodCategoriesById(id: any): Observable<any> {
+    return this.http.delete<any>(`${this.apiEndPoint}/DeleteFoodCategoryById?categoryId=`+id)
+  }
+
+  getAllFoodCategoriesNameByID(id: any): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoint}/GetFoodItemByCategory?categoryId=`+id)
+  }
 }
