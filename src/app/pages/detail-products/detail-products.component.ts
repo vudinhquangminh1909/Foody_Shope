@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MasterService } from '../../services/master.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail-products',
@@ -12,19 +12,38 @@ export class DetailProductsComponent {
   items: any[] = []
   constructor(
     private master_Service: MasterService,
-    private activate: ActivatedRoute
+    private activate: ActivatedRoute,
+    private router: Router
   ) {
     this.activate.params.subscribe((res: any)=> {
-      debugger;
+      // debugger;
       this.loadFoodItemsByCategory(res.categoryname)
     })
   }
 
+  // loadFoodItemsByCategory(id: number) {
+  //   this.master_Service.getAllFoodCategoriesName(id).subscribe((res:any) => {
+  //     this.items = res.data;
+  //     console.log(this.items)
+  //   })
+  // }
+
   loadFoodItemsByCategory(id: number) {
     this.master_Service.getAllFoodCategoriesName(id).subscribe((res:any) => {
-      this.items = res.data;
-      console.log(this.items)
+      if (res.data.length == 0) {
+        this.items = [];
+        const long = "No data"
+        console.log(long)
+      }
+      else {
+        this.items = res.data;
+          console.log(this.items)
+        }
     })
+  }
+
+  navigateToRestaurantFoods() {
+    this.router.navigate(["/home"])
   }
 
 }

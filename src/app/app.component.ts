@@ -35,7 +35,12 @@ export class AppComponent {
     public dialog: MatDialog,
     public master_Serivce: MasterService,
     private router: Router,
-  ) {}
+  ) {
+    const isLocalData = localStorage.getItem('zomato_user');
+    if(isLocalData != null) {
+      this.loggedUserData = JSON.parse(isLocalData)
+    }
+  }
 
   onLogin() {
     const model =document.getElementById('loginModal');
@@ -75,9 +80,15 @@ export class AppComponent {
   }
 
   onLogoFF() {
+    const userData = JSON.parse(localStorage.getItem('zomato_user') || '{}');
+    const userRole = userData.role;
     localStorage.removeItem('zomato_user')
     this.loggedUserData = null;
-    this.router.navigate(['/home']);
+    if(userRole === 'Admin') {
+      this.router.navigate(['/Control_Panel']);
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 
   onRegister() {

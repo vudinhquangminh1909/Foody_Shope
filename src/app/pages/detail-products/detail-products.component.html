@@ -1,4 +1,4 @@
-<h1 class="position-relative mb-4 text-center py-2 px-4 text-bg-secondary border border-secondary rounded-pill">PRODUCT
+<!-- <h1 class="position-relative mb-4 text-center py-2 px-4 text-bg-secondary border border-secondary rounded-pill">PRODUCT
     LIST
 </h1>
 <div class="container">
@@ -14,4 +14,40 @@
             </mat-card>
         </div>
     </div>
+</div> -->
+
+<div class="container">
+
+    <div class="center" style="position: relative; left: 9%;">
+        <div class="Display_header">
+            <button class="btn_header_display " mat-flat-button (click)="navigateToRestaurantFoods()">Back</button>
+            <h2>PRODUCTS</h2>
+        </div>
+
+        <!-- Kiểm tra nếu mảng items rỗng -->
+        <div *ngIf="items.length === 0" class="no-data">
+            <p>No data</p>
+        </div>
+
+        <div class="list">
+            <div class="item" data-key="1" *ngFor="let view of items">
+                <div class="img">
+                    <img [src]="view.photoUrl" alt="">
+                </div>
+                <div class="content">
+                    <div class="title">{{view.menuItemName}}</div>
+                    <!-- <div class="des">
+                        {{view_Category.description}}
+                    </div> -->
+                    <div class="price">${{view.price}}</div>
+                    <input type="number" class="count" min="1" value="1">
+                    <button class="update">Update</button>
+                    <button class="detele">Detele</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 </div>
